@@ -30,8 +30,9 @@ let topPipeImg;
 let bottomPipeImg;
 
 //physics
-let velocityX = -2;
-
+let velocityX = -2; // it make the pipe going left
+let velocityY = 0; //bird jump speed
+let gravity = 0.4; 
 
 window.onload = function(){
     board = document.getElementById("board");
@@ -57,7 +58,8 @@ window.onload = function(){
     
     
     requestAnimationFrame(update)
-    setInterval(placePipes, 1500); // setiap 1.5 seconds
+    setInterval(placePipes, 1500); // every 1.5 seconds
+    document.addEventListener("keydown", jump)
     
 }
 
@@ -66,6 +68,10 @@ function update(){
     context.clearRect(0,0, board.width, board.height);
 
     //bird
+    velocityY += gravity;
+    // bird.y += velocityY;
+    bird.y = Math.max(bird.y + velocityY, 0); // to make sure the bird doesn't go off the screen
+
     context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
     
     //pipes
@@ -79,6 +85,7 @@ function update(){
 function placePipes(){
 
     let randomPipeY = pipeY - pipeHeight/4 - Math.random() * (pipeHeight/2);
+    let openingSpace = board.height/4;
 
     let toppipe = {
         img : topPipeImg,
@@ -89,4 +96,24 @@ function placePipes(){
         passed: false
     }
     pipeArray.push(toppipe)
+
+    let bottomPipe = {
+        img: bottomPipeImg,
+        x: pipeX,
+        y: randomPipeY + pipeHeight + openingSpace,
+        width: pipeWidth,
+        height: pipeHeight,
+        passed: false
+    }
+    pipeArray.push(bottomPipe)
+}
+
+function jump(e){
+    if(e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX"){
+        velocityY = -6; // Negative value makes the bird move upward
+    }
+}
+
+function detectCollison(a, b){
+    
 }
