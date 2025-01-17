@@ -21,14 +21,16 @@ let bird = {
 
 //pipes
 let pipeArray = [];
-let pipeWidth = 64;
-let pipeHeight = 3;
+let pipeWidth = 64; 
+let pipeHeight = 512;
 let pipeX = boardWidth;
 let pipeY = 0;
 
 let topPipeImg;
 let bottomPipeImg;
 
+//physics
+let velocityX = -2;
 
 
 window.onload = function(){
@@ -69,15 +71,19 @@ function update(){
     //pipes
     for(let i = 0; i < pipeArray.length; i++){
         let pipe = pipeArray[i];
+        pipe.x += velocityX;
         context.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
     }
 }
 
 function placePipes(){
+
+    let randomPipeY = pipeY - pipeHeight/4 - Math.random() * (pipeHeight/2);
+
     let toppipe = {
         img : topPipeImg,
         x: pipeX,
-        y: pipeY,
+        y: randomPipeY,
         width: pipeWidth,
         height: pipeHeight,
         passed: false
