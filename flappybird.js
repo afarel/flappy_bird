@@ -65,7 +65,7 @@ window.onload = function(){
     requestAnimationFrame(update)
     setInterval(placePipes, 1500); // every 1.5 seconds
     document.addEventListener("keydown", jump)
-    document.addEventListener("click", jump)
+    document.addEventListener("touchstart", jump)
     
 }
 
@@ -143,7 +143,7 @@ function placePipes(){
 }
 
 function jump(e){
-    if(e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX" || e.code === "click"){
+    if(e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX" || e.code === "touchstart"){
         velocityY = -6; // Negative value makes the bird move upward
 
         //reset the game
