@@ -143,7 +143,10 @@ function placePipes(){
 }
 
 function jump(e){
-    if(e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX" || e.code === "touchstart"){
+    if(e.type === "keydown" && 
+        (e.code === "Space" || e.code === "ArrowUp" || e.code === "KeyX") ||
+        e.type === "click" ||
+        e.type === "touchstart"){
         velocityY = -6; // Negative value makes the bird move upward
 
         //reset the game
