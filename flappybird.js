@@ -32,7 +32,7 @@ let bottomPipeImg;
 //physics
 let velocityX = -2; // it make the pipe going left
 let velocityY = 0; //bird jump speed
-let gravity = 0.2; 
+let gravity = 0.3; 
 
 let gameOver = false;
 
